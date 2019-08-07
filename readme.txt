@@ -4,14 +4,14 @@ REQUISITOS
 ----------------------------------------------
 1.- TENER INSTALADO jdk desde la version 7
 2.- Maven para bajar las dependencias
-3.- Preferentemente tener instalado STS, eclipse optimizado por la genete de Spring para un mejor manejo
+3.- Preferentemente tener instalado STS, eclipse optimizado por la gente de Spring para un mejor manejo
     (cualquier otro editor deberia de funcionar igual correctamente, ojo que puede tener otro tipo de consideraciones)
 4.- Tener instalado postman
 ----------------------------------------------
 INSTALACION
 ----------------------------------------------
 1.- COPIAR EN EL WORSPACE DE STS
-2.- ABRIR EL PROYECTO CON EL EXPLORADOR DE PAQUETES Y UBICAR EL ARCHIVO POW.XML
+2.- ABRIR EL PROYECTO CON EL EXPLORADOR DE PAQUETES Y UBICAR EL ARCHIVO POM.XML
 3.- CLIC DERECHO, IR A RUN AS/MAVEN INSTALL, ESTE DEBERA BAJAR TODAS LAS DEPENDENCIAS QUE ESTAN CONFIGURADAS EN EL MAVEN
 ----------------------------------------------
 EJECUCION
