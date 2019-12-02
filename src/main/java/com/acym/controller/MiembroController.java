@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.acym.entity.Miembro;
+import com.acym.resource.exceptions.CampoVacio;
+import com.acym.resource.exceptions.MiembroNoExiste;
+import com.acym.resource.exceptions.TarjetaDiezmoRelacionada;
 import com.acym.service.IMiembroService;
 
 @RestController
@@ -37,17 +40,17 @@ public class MiembroController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/registroMiembro")
-	public Miembro registraMiembro(@RequestBody Miembro miembro) {
+	public Miembro registraMiembro(@RequestBody Miembro miembro) throws CampoVacio, TarjetaDiezmoRelacionada {
 		return miembroService.registraMiembro(miembro);
 	}
 	
-	@PutMapping("/modificaMiembro/{id}")
-	public Miembro modificaMiembro(@RequestBody Miembro miembro, @PathVariable Long id) {
-		return miembroService.modificaMiembro(miembro, id);
+	@PutMapping("/modificaMiembro")
+	public Miembro modificaMiembro(@RequestBody Miembro miembro) throws CampoVacio, MiembroNoExiste {
+		return miembroService.modificaMiembro(miembro);
 	}
 	
 	@GetMapping("/estadoMiembro/{id}")
-	public boolean eliminaMiembro(@PathVariable Long id) {
+	public boolean eliminaMiembro(@PathVariable Long id) throws MiembroNoExiste {
 		return miembroService.cambiaEstado(id);
 	}
 }

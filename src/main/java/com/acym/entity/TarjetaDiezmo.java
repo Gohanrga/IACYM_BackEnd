@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +22,11 @@ public class TarjetaDiezmo implements Serializable{
 	@Column(name="id_diezmo")
 	private long idDiezmo;
 	private int numeroTarjeta;
+	private int estado;
+	
+	/*@OneToOne(mappedBy = "tarjetaDiezmo")
+	private Miembro miembro;*/
+	
 	public long getIdDiezmo() {
 		return idDiezmo;
 	}
@@ -32,6 +38,12 @@ public class TarjetaDiezmo implements Serializable{
 	}
 	public void setNumeroTarjeta(int numeroTarjeta) {
 		this.numeroTarjeta = numeroTarjeta;
+	}
+	public int getEstado() {
+		return estado;
+	}
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 	
 }

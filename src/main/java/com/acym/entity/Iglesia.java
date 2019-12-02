@@ -21,6 +21,7 @@ public class Iglesia implements Serializable{
 	private long idIglesia;
 	private String sigla;
 	private String nombre;
+	
 	public long getIdIglesia() {
 		return idIglesia;
 	}

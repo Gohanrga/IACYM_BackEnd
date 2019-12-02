@@ -3,37 +3,28 @@ package com.acym.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="miembro")
-public class Miembro implements Serializable{
-	
-	private static final long serialVersionUID = 6291864322967516957L;
+@Table(name="tipo_Cambio")
+public class TipoCambio implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_miembro")
-	private long idMiembro;
-	private String nombre;
-	private String apellido;
-	@Column(name="id_iglesia")
-	private long idIglesia;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_diezmo", referencedColumnName="id_diezmo")
-	private TarjetaDiezmo tarjetaDiezmo; 
-	
-	private int estado;
+	@Column(name="id_tipo_cambio")
+	private Long idTipoCambio;
+	private Double valor;
+	@Temporal(TemporalType.DATE)
+	private Date fecha;
 	@Column(name="fecha_creacion")
 	@Temporal(TemporalType.DATE)
 	private Date fechaCreacion;
@@ -44,29 +35,23 @@ public class Miembro implements Serializable{
 	private Date fechaModificacion;
 	@Column(name="usuario_modificacion")
 	private String usuarioModificacion;
-	public long getIdMiembro() {
-		return idMiembro;
+	public Long getIdTipoCambio() {
+		return idTipoCambio;
 	}
-	public void setIdMiembro(long idMiembro) {
-		this.idMiembro = idMiembro;
+	public void setIdTipoCambio(Long idTipoCambio) {
+		this.idTipoCambio = idTipoCambio;
 	}
-	public String getNombre() {
-		return nombre;
+	public Double getValor() {
+		return valor;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
-	public String getApellido() {
-		return apellido;
+	public Date getFecha() {
+		return fecha;
 	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-	public long getIdIglesia() {
-		return idIglesia;
-	}
-	public void setIdIglesia(long idIglesia) {
-		this.idIglesia = idIglesia;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 	public Date getFechaCreacion() {
 		return fechaCreacion;
@@ -92,18 +77,4 @@ public class Miembro implements Serializable{
 	public void setUsuarioModificacion(String usuarioModificacion) {
 		this.usuarioModificacion = usuarioModificacion;
 	}
-	public int getEstado() {
-		return estado;
-	}
-	public void setEstado(int estado) {
-		this.estado = estado;
-	}
-	public TarjetaDiezmo getTarjetaDiezmo() {
-		return tarjetaDiezmo;
-	}
-	public void setTarjetaDiezmo(TarjetaDiezmo tarjetaDiezmo) {
-		this.tarjetaDiezmo = tarjetaDiezmo;
-	}
-	
-	
 }

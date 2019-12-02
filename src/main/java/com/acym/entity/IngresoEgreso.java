@@ -3,11 +3,14 @@ package com.acym.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,8 +24,10 @@ public class IngresoEgreso implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_ingreso_egreso")
 	private long idIngresoEgreso;
+	
 	@Column(name="tipo_cuenta")
 	private String tipocuenta;
+	
 	@Column(name="fecha_registro")
 	@Temporal(TemporalType.DATE)
 	private Date fechaRegistro;
@@ -32,13 +37,22 @@ public class IngresoEgreso implements Serializable{
 	@Column(name="monto_usd")
 	private Double montoUsd;
 	private String descripcion;
-	private String codigo;
-	@Column(name="id_tipo_concepto")
-	private long idTipoConcepto;
-	@Column(name="id_culto")
-	private long idCulto;
-	@Column(name="id_miembro")
-	private long idMiembro;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "codigo", referencedColumnName="codigo")
+	private CuentaContable cuentaContable;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_tipo_concepto", referencedColumnName="id_tipo_concepto")
+	private TipoConcepto tipoConcepto;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_culto", referencedColumnName="id_culto")
+	private Culto culto;
+	
+	@OneToOne(cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name = "id_miembro", referencedColumnName="id_miembro", nullable=true)
+	private Miembro miembro;
 	
 	@Column(name="fecha_creacion")
 	@Temporal(TemporalType.DATE)
@@ -50,6 +64,9 @@ public class IngresoEgreso implements Serializable{
 	private Date fechaModificacion;
 	@Column(name="usuario_modificacion")
 	private String usuarioModificacion;
+	
+	private int estado;
+	
 	public long getIdIngresoEgreso() {
 		return idIngresoEgreso;
 	}
@@ -92,29 +109,12 @@ public class IngresoEgreso implements Serializable{
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public String getCodigo() {
-		return codigo;
+	
+	public CuentaContable getCuentaContable() {
+		return cuentaContable;
 	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-	public long getIdTipoConcepto() {
-		return idTipoConcepto;
-	}
-	public void setIdTipoConcepto(long idTipoConcepto) {
-		this.idTipoConcepto = idTipoConcepto;
-	}
-	public long getIdCulto() {
-		return idCulto;
-	}
-	public void setIdCulto(long idCulto) {
-		this.idCulto = idCulto;
-	}
-	public long getIdMiembro() {
-		return idMiembro;
-	}
-	public void setIdMiembro(long idMiembro) {
-		this.idMiembro = idMiembro;
+	public void setCuentaContable(CuentaContable cuentaContable) {
+		this.cuentaContable = cuentaContable;
 	}
 	public Date getFechaCreacion() {
 		return fechaCreacion;
@@ -139,6 +139,30 @@ public class IngresoEgreso implements Serializable{
 	}
 	public void setUsuarioModificacion(String usuarioModificacion) {
 		this.usuarioModificacion = usuarioModificacion;
+	}
+	public TipoConcepto getTipoConcepto() {
+		return tipoConcepto;
+	}
+	public void setTipoConcepto(TipoConcepto tipoConcepto) {
+		this.tipoConcepto = tipoConcepto;
+	}
+	public Culto getCulto() {
+		return culto;
+	}
+	public void setCulto(Culto culto) {
+		this.culto = culto;
+	}
+	public Miembro getMiembro() {
+		return miembro;
+	}
+	public void setMiembro(Miembro miembro) {
+		this.miembro = miembro;
+	}
+	public int getEstado() {
+		return estado;
+	}
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 	
 }

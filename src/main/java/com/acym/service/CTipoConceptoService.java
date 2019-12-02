@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.acym.dao.TipoConceptoDao;
 import com.acym.entity.TipoConcepto;
+import com.acym.resource.exceptions.ClasificadorNoEncontrado;
 
 @Service
 public class CTipoConceptoService implements ITipoConceptoService{
@@ -30,11 +31,10 @@ public class CTipoConceptoService implements ITipoConceptoService{
 	}
 
 	@Override
-	public TipoConcepto modificaConcepto(TipoConcepto tipoConcepto, Long id) {
-		Optional<TipoConcepto> tipoConceptoOptional = tipoConceptoDao.findById(id);
+	public TipoConcepto modificaConcepto(TipoConcepto tipoConcepto) throws ClasificadorNoEncontrado {
+		Optional<TipoConcepto> tipoConceptoOptional = tipoConceptoDao.findById(tipoConcepto.getIdTipoConcepto());
 		if(!tipoConceptoOptional.isPresent())
-			return null;
-		tipoConcepto.setIdTipoConcepto(id);
+			throw new ClasificadorNoEncontrado("Tipo Concepto");
 		return tipoConceptoDao.save(tipoConcepto);
 	}
 

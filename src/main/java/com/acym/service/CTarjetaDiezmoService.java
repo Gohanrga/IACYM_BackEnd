@@ -15,7 +15,7 @@ public class CTarjetaDiezmoService implements ITarjetaDiezmoService{
 	
 	@Override
 	public List<TarjetaDiezmo> getTarjetasDiezmo() {
-		return (List<TarjetaDiezmo>)tarjetaDiezmoDao.findAll();
+		return (List<TarjetaDiezmo>)tarjetaDiezmoDao.obtieneTarjetasDiezmo();
 	}
 
 	@Override

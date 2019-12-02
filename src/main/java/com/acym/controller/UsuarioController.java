@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.acym.entity.Usuarios;
+import com.acym.resource.exceptions.CampoVacio;
+import com.acym.resource.exceptions.LoginIncorrecto;
+import com.acym.resource.exceptions.UsuarioIdNoEncontrado;
 import com.acym.service.IUsuarioService;
 
 @RestController
@@ -32,22 +35,22 @@ public class UsuarioController {
 	}
 	 
 	@RequestMapping(method=RequestMethod.POST, value="/registroUsuario")
-	public Usuarios registraUsuario(Usuarios usuario) {
+	public Usuarios registraUsuario(@RequestBody Usuarios usuario) throws CampoVacio {
 		return usuarioService.registraUsuario(usuario);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/logueo")
-	public boolean verificaUsuario(Usuarios usuario) {
+	public Usuarios verificaUsuario(@RequestBody Usuarios usuario) throws LoginIncorrecto {
 		return usuarioService.verificaUsuario(usuario);
 	}
 	
-	@PutMapping("/modificaUsuario/{id}")
-	public Usuarios modificaUsuario(Usuarios usuario, @PathVariable Long id) {
-		return usuarioService.modificaUsuario(usuario, id);
+	@PutMapping("/modificaUsuario")
+	public Usuarios modificaUsuario(@RequestBody  Usuarios usuario) throws CampoVacio, UsuarioIdNoEncontrado {
+		return usuarioService.modificaUsuario(usuario);
 	}
 	
 	@DeleteMapping("/eliminaUsuario/{id}")
-	public boolean eliminaUsuario(@PathVariable Long id) {
+	public boolean eliminaUsuario(@PathVariable Long id) throws UsuarioIdNoEncontrado {
 		return usuarioService.eliminaUsuario(id);
 	}
 	
